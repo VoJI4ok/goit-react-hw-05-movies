@@ -16,7 +16,8 @@ export const StyledLink = styled(NavLink)`
   color: #555;
   font-size: 17px;
   margin-left: 20px;
-
+  text-decoration: none;
+outline: none;
   &.active {
     color: orange;
   }

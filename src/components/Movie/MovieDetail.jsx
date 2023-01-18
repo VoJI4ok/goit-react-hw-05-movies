@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useParams, Outlet, Link } from 'react-router-dom';
+import { useParams, Outlet,  } from 'react-router-dom';
 import { searchMovieToIdApi } from '../Utils/Api';
 import { useLocation } from 'react-router-dom';
-
+import {Button , Movielist} from './MovieDetail.styled'
 const MovieDetails = () => {
   const START_URL = 'https://image.tmdb.org/t/p/w500/';
   const [details, setDetails] = useState([]);
   const { movieId } = useParams();
   const location = useLocation();
-  console.log(location);
+
 
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const MovieDetails = () => {
   const { title, poster_path, vote_average, overview, genres } = details;
   return (
     <>
-      <Link to={location.state || '/'}>Go back</Link>
+      <Button to={location.state || '/'}>Go back</Button>
       <img src={`${START_URL}${poster_path}`} alt={title}></img>
       <h1>{title}</h1>
       <p>User score : {Math.round(vote_average * 10)}%</p>
@@ -31,18 +31,17 @@ const MovieDetails = () => {
       </ul>
 
       <h3>Additional information</h3>
-      <ul>
-        <li>
-          <Link state={location.state} to="cast">
+      <Movielist>
+        
+          <Button state={location.state} to="cast">
             Cast
-          </Link>
-        </li>
-        <li>
-          <Link state={location.state} to="reviews">
+          </Button>
+    
+          <Button state={location.state} to="reviews">
             Reviews
-          </Link>
-        </li>
-      </ul>
+          </Button>
+        
+      </Movielist>
 
       <Outlet />
     </>
